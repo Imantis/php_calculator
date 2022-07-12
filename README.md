@@ -1,6 +1,8 @@
 ## How to run calculator
 
-1. Run `docker-compose up`
-2. Run `composer install` from php container
-3. Open `https://localhost` in web browser
-4. Run `php bin/phpunit` - for running tests
+1. Run `docker-compose build --pull --no-cache`
+2. Run `docker-compose up`
+3. Run `composer install --ignore-platform-reqs`
+4. Open `https://localhost` in web browser
+5. Run `php bin/phpunit` - for running tests
+6. Run docker-compose down --remove-orphans to stop the Docker containers.
