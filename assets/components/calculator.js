@@ -1,3 +1,5 @@
+var xhttp = new XMLHttpRequest();
+
 const calculator = {
   displayValue: '0',
   firstOperand: null,
@@ -71,12 +73,36 @@ function updateDisplay() {
   display.value = calculator.displayValue;
 }
 
+function saveCalculatorRecord() {
+  //Save record to database
+  xhttp.open("POST", "/calculator/create_record");
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("record=" + calculator.displayValue);
+
+  //Remove first child
+  var records = document.getElementById("records");
+  records.removeChild(records.lastElementChild);
+
+  //Add new record to the list
+  var newLi = document.createElement("li");
+  var newTextValue = document.createTextNode(calculator.displayValue);
+  newLi.appendChild(newTextValue);
+  records.prepend(newLi);
+}
+
 updateDisplay();
 
 const keys = document.querySelector('.calculator-keys');
 keys.addEventListener('click', (event) => {
   const { target } = event;
   if (!target.matches('button')) {
+    return;
+  }
+
+  if (target.classList.contains('equal-sign')) {
+    handleOperator(target.value);
+    updateDisplay();
+    saveCalculatorRecord();
     return;
   }
 

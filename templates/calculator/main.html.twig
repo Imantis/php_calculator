@@ -2,6 +2,16 @@
 
 {% block body %}
 
+    <h1>Last records</h1>
+
+    {% if calculatorRecords %}
+        <ul id="records">
+            {% for calculatorRecord in calculatorRecords %}
+                <li>{{ calculatorRecord.record }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div class="calculator">
 
         <input type="text" class="calculator-screen" value="" disabled/>
@@ -33,11 +43,5 @@
 
         </div>
     </div>
-
-    {% if calculatorRecords %}
-        {% for calculatorRecords in calculatorRecord %}
-            <li>{{ calculatorRecord.record }}</li>
-        {% endfor %}
-    {% endif %}
 
 {% endblock %}
