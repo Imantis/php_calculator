@@ -18,7 +18,6 @@ class CalculatorController extends AbstractController
     public function show(): Response
     {
         //get calculatorRecords
-//        $calculatorRecords = $this->doctrine->getRepository(CalculatorRecord::class)->findAll();
         $calculatorRecords = $this->doctrine->getRepository(CalculatorRecord::class)->getRecords();
 
         return $this->render('calculator/main.html.twig', [
